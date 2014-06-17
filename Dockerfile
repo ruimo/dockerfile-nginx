@@ -14,7 +14,7 @@
 # authorized_keys: Used as public key for ssh access.
 #
 # 3. If you want to tweak nginx and monitor configuration.
-#   Their configuration files reside in /etc/monit/conf.d and /etc/ssh respectively. Modify them in your Dockefile.
+#   Their configuration files reside in /etc/nginx and /etc/monit/conf.d respectively. Modify them in your Dockefile.
 #
 # 4. Build your image by 'docker build'.
 #
