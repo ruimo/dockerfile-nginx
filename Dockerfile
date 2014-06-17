@@ -26,7 +26,7 @@ RUN apt-get install -y nginx monit openssh-server
 
 ADD monit/nginx.conf /etc/monit/conf.d/nginx.conf
 ADD monit/ssh.conf   /etc/monit/conf.d/ssh.conf
-ONBUILD ADD monit/misc.conf /etc/monit/conf.d/misc.conf
+ONBUILD ADD monit /etc/monit/conf.d/
 
 RUN mkdir /root/.ssh
 ONBUILD ADD authorized_keys /root/.ssh/authorized_keys
