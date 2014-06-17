@@ -7,19 +7,21 @@ Both ssh and nginx are monitored by monit and will be automatically restarted on
 
 # How to use:
 
-* You need to prepare your own Dockerfile having only two lines in it:
+* You need to prepare your own Dockerfile having at least two lines inside:
 ```
-    --- Your Docker file ---
-    FROM ruimo/dockerfile-nginx
-    MAINTAINER <your name>
-    <EOF>
+--- Your Docker file ---
+FROM ruimo/dockerfile-nginx
+MAINTAINER <your name>
+<EOF>
 ```
 
 * The following files are needed to build you Dockerfile:
 ```
  authorized_keys: Used as public key for ssh access.
- monit/misc.conf: If you need additional monit configuration, such as mail notification, place it in this file.
 ```
+
+* If you want to tweak nginx and monitor configuration.
+ Their configuration files reside in /etc/monit/conf.d and /etc/ssh respectively. Modify them in your Dockefile.
 
 * Build your image by ```docker build```.
 
