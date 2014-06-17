@@ -1,3 +1,23 @@
+# Dockerfile for nginx + monit + ssh
+#
+# Both ssh and nginx are monitored by monit and will be automatically restarted once they are aborted.
+#
+# How to use:
+# 1. You need to prepare your own Dockerfile having only two lines in it:
+# --- Your Docker file ---
+# FROM ruimo/monit_ssh_nginx
+# MAINTAINER <your name>
+# <EOF>
+#
+# 2. The following files are needed to build you Dockerfile:
+#   authorized_keys: Used as public key for ssh access.
+#   monit/misc.conf: If you need additional monit configuration, such as mail notification, place it in this file.
+#
+# 3. Build your image by 'docker build'.
+#
+# 4. Run your image by 'docker run -d -p 80:80 -p 22:22 <your image id>
+#   Of course, you can change port number as you like.
+#
 FROM ubuntu:14.04
 MAINTAINER Shisei Hanai<ruimo.uno@gmail.com>
 
@@ -6,10 +26,7 @@ RUN apt-get install -y nginx monit openssh-server
 
 ADD monit/nginx.conf /etc/monit/conf.d/nginx.conf
 ADD monit/ssh.conf   /etc/monit/conf.d/ssh.conf
-
-# Caution! Port 22 should not expose to public internet.
-#RUN sed -i.bak "s/#PasswordAuthentication yes/PasswordAuthentication yes/" /etc/ssh/sshd_config
-#RUN echo 'root:manager' | chpasswd
+ONBUILD ADD monit/misc.conf /etc/monit/conf.d/misc.conf
 
 RUN mkdir /root/.ssh
 ONBUILD ADD authorized_keys /root/.ssh/authorized_keys
