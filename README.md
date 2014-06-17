@@ -10,7 +10,7 @@ Both ssh and nginx are monitored by monit and will be automatically restarted on
 * You need to prepare your own Dockerfile having only two lines in it:
 ```
     --- Your Docker file ---
-    FROM ruimo/monit_ssh_nginx
+    FROM ruimo/dockerfile-nginx
     MAINTAINER <your name>
     <EOF>
 ```

@@ -5,7 +5,7 @@
 # How to use:
 # 1. You need to prepare your own Dockerfile having only two lines in it:
 # --- Your Docker file ---
-# FROM ruimo/monit_ssh_nginx
+# FROM ruimo/dockerfile-nginx
 # MAINTAINER <your name>
 # <EOF>
 #
