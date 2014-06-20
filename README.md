@@ -20,10 +20,10 @@ MAINTAINER <your name>
  authorized_keys: Used as public key for ssh access.
 ```
 
-* If you want to tweak nginx and monitor configuration.
+* If you want to tweak nginx and monit configuration.
  Their configuration files reside in /etc/nginx and /etc/monit/conf.d respectively. Modify them in your Dockefile.
 
 * Build your image by ```docker build```.
 
 * Run your image by ```docker run -d -p 80:80 -p 22:22 <your image id>```
- Of course, you can change port number as you like.
+ Of course, you can change port number as you like. You can login ssh by user 'nginx'.

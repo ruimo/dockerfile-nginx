@@ -1,39 +1,24 @@
 # Dockerfile for nginx + monit + ssh
 #
-# Both ssh and nginx are monitored by monit and will be automatically restarted once they are aborted.
-#
-# How to use:
-# 1. You need to prepare your own Dockerfile having at least two lines inside:
-# --- Your Docker file ---
-# FROM ruimo/dockerfile-nginx
-# MAINTAINER <your name>
-# <EOF>
-#
-# 2. The following files are needed to build you Dockerfile:
-#
-# authorized_keys: Used as public key for ssh access.
-#
-# 3. If you want to tweak nginx and monitor configuration.
-#   Their configuration files reside in /etc/nginx and /etc/monit/conf.d respectively. Modify them in your Dockefile.
-#
-# 4. Build your image by 'docker build'.
-#
-# 5. Run your image by 'docker run -d -p 80:80 -p 22:22 <your image id>
-#   Of course, you can change port number as you like.
+# See REAMDE.md for detail.
 #
 FROM ubuntu:14.04
 MAINTAINER Shisei Hanai<ruimo.uno@gmail.com>
 
 RUN apt-get update
-RUN apt-get install -y nginx monit openssh-server
+RUN apt-get install -y nginx monit openssh-server w3m
 
 ADD monit   /etc/monit/conf.d/
 
-RUN mkdir /root/.ssh
-ONBUILD ADD authorized_keys /root/.ssh/authorized_keys
-ONBUILD RUN chmod 755 /root
-ONBUILD RUN chmod 600 /root/.ssh/authorized_keys
-ONBUILD RUN chown root:root /root/.ssh/authorized_keys
+# This is a user for ssh login. Need to change the password.
+RUN useradd -s /bin/bash -p password --create-home --user-group nginx
+RUN gpasswd -a nginx sudo
+
+RUN mkdir /home/nginx/.ssh
+ONBUILD ADD authorized_keys /home/nginx/.ssh/authorized_keys
+ONBUILD RUN chmod 755 /home/nginx
+ONBUILD RUN chmod 600 /home/nginx/.ssh/authorized_keys
+ONBUILD RUN chown nginx:nginx /home/nginx/.ssh/authorized_keys
 
 EXPOSE 80
 EXPOSE 22
