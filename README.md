@@ -26,4 +26,4 @@ MAINTAINER <your name>
 * Build your image by ```docker build```.
 
 * Run your image by ```docker run -d -p 80:80 -p 22:22 <your image id>```
- Of course, you can change port number as you like. You can login ssh by user 'nginx'.
+ Of course, you can change port number as you like. You can login ssh by user 'nginx'. The initial password is 'password' excluding quote. Since the account is set expired, you will be forced to change initial password.
