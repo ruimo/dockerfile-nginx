@@ -24,7 +24,7 @@ RUN mkdir /home/nginx/.ssh
 ONBUILD ADD authorized_keys /home/nginx/.ssh/authorized_keys
 ONBUILD RUN chmod 755 /home/nginx
 ONBUILD RUN chmod 600 /home/nginx/.ssh/authorized_keys
-ONBUILD RUN chown nginx:nginx /home/nginx/.ssh/authorized_keys
+ONBUILD RUN chown -R nginx:nginx /home/nginx/.ssh
 
 EXPOSE 80
 EXPOSE 2201
