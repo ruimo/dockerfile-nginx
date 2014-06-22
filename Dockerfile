@@ -27,6 +27,7 @@ ONBUILD RUN chmod 600 /home/nginx/.ssh/authorized_keys
 ONBUILD RUN chown -R nginx:nginx /home/nginx/.ssh
 
 EXPOSE 80
+EXPOSE 443
 EXPOSE 2201
 
 CMD ["/usr/bin/monit", "-I", "-c", "/etc/monit/monitrc"]
