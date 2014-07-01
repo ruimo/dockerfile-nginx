@@ -18,7 +18,11 @@ RUN passwd -e nginx
 RUN gpasswd -a nginx sudo
 
 # Use non standard port for ssh(22) to prevent atack.
-RUN sed -i.bak "s/Port 22/Port 2201/" /etc/ssh/sshd_config
+RUN sed -i.bak \
+  -e "s/Port 22/Port 2201/" \
+  -e "s/^\s*PasswordAuthentication\(.*\)$/# PasswordAuthentication\1/" \
+  /etc/ssh/sshd_config
+RUN echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
 
 RUN mkdir /home/nginx/.ssh
 ONBUILD ADD authorized_keys /home/nginx/.ssh/authorized_keys
